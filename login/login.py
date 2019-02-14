@@ -2,16 +2,11 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-import Usuario
 
 class LoginWindow(Gtk.Window):
 
     def __init__(self):        
         Gtk.Window.__init__(self, title="Login nBackup")
-
-        self.usuario = Usuario()
-        self.usuario.nome = "Marcelo"
-        self.usuario.senha = "1234"
 
         self.set_resizable(False)
         #self.set_position(Gtk.WindowPosition.MOUSE)
@@ -61,9 +56,3 @@ class LoginWindow(Gtk.Window):
 
         
     
-
-win = LoginWindow()
-win.set_position(Gtk.WindowPosition.CENTER)
-win.connect("destroy", Gtk.main_quit)
-win.show_all()
-Gtk.main()
