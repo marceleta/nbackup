@@ -1,12 +1,15 @@
 import gi
+import sys
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from tela.tela import Aplicacao
 
 
 class LoginWindow(Gtk.Window):
 
     def __init__(self):        
         Gtk.Window.__init__(self, title="Login nBackup")
+        self.connect("destroy", Gtk.main_quit)
 
         self.set_resizable(False)
         #self.set_position(Gtk.WindowPosition.MOUSE)
@@ -32,7 +35,7 @@ class LoginWindow(Gtk.Window):
         grid.attach_next_to(self.en_senha, lb_senha, Gtk.PositionType.RIGHT, 5, 1)
         
         bt_entrar = Gtk.Button(label="Entrar")
-        bt_entrar.connect("clicked", self.print_text_login)
+        bt_entrar.connect("clicked", self.on_entrar_clicked)
         grid.attach_next_to(bt_entrar, lb_senha, Gtk.PositionType.BOTTOM, 3, 1)
 
         bt_cancelar = Gtk.Button(label="Cancelar")
@@ -41,18 +44,19 @@ class LoginWindow(Gtk.Window):
 
         
     def on_entrar_clicked(self, widget):        
-        if self.usuario.nome == self.en_usuario.get_text() and self.usuario.senha == self.en_senha.get_text():
-            print("login corrento")
-            
-            
-            
+        self.show_aplicacao()           
 
     def on_cancelar_clicked(self, widget):
-        print("cancelar clicked")
+        sys.exit()
 
-    def print_text_login(self, widget):
-        print(self.en_usuario.get_text())
-        print(self.en_senha.get_text())
+    def show_aplicacao(self):
+        w = Aplicacao()
+        exit_status = w.run(sys.argv)
+        sys.exit(exit_status)
+
+    def show_login(self):
+        self.show_all()
+        Gtk.main()
 
         
     
